@@ -51,7 +51,7 @@ make up        # Start Django, MySQL, Elasticsearch containers
 make attach    # Shell into Django container
 python manage.py migrate
 python manage.py collect_data -t GITHUB_TOKEN -u USERNAME  # Multi-hour GitHub crawl
-make run       # Start Django dev server on port 8000
+make run       # Start Django dev server inside container (accessible at http://127.0.0.1:8000)
 ```
 
 **Spark Cluster Setup**:
