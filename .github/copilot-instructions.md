@@ -51,7 +51,7 @@ make up        # Start Django, MySQL, Elasticsearch containers
 make attach    # Shell into Django container
 python manage.py migrate
 python manage.py collect_data -t GITHUB_TOKEN -u USERNAME  # Multi-hour GitHub crawl
-make run       # Start Django dev server inside container (accessible at http://127.0.0.1:8000)
+make run       # Start Django dev server inside container (accessible at http://localhost:8000)
 ```
 
 **Spark Cluster Setup**:
@@ -79,7 +79,7 @@ make spark_start  # Standalone cluster on localhost:7077
 
 ## Integration Points
 
-- **MySQL**: Hardcoded connection in `DatasetUtils.scala:11-15` (localhost:3306/albedo, user: root, password: 123)
+- **MySQL**: Hardcoded connection in `DatasetUtils.scala:11-15` (127.0.0.1:3306/albedo, user: root, password: 123)
 - **Elasticsearch**: Content-based recommender queries ES More Like This API at localhost:9200 (see `ContentRecommenderBuilder.scala`)
 - **GitHub API**: Rate-limited crawler with token rotation in `collect_data.py:36-48`, requires multiple tokens for production scale
 
