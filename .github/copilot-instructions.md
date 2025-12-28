@@ -66,7 +66,7 @@ make spark_start  # Standalone cluster on localhost:7077
 4. `make train_word2vec` → Word2VecCorpusBuilder → text embeddings
 5. `make train_lr` → LogisticRegressionRanker → final ranking model
 
-**Debugging Spark Jobs**: Set `RUN_WITH_INTELLIJ=true` env var to run locally with configurable memory. Check `LogisticRegressionRanker.scala:24-34` for IntelliJ-specific config block.
+**Debugging Spark Jobs**: Set `RUN_WITH_INTELLIJ=true` env var to run locally with configurable memory. Check `LogisticRegressionRanker.scala:24-33` for IntelliJ-specific config block.
 
 ## Project-Specific Conventions
 
@@ -74,7 +74,7 @@ make spark_start  # Standalone cluster on localhost:7077
 - **Date-Based Caching**: Parquet files include `${settings.today}` (yyyyMMdd format) in paths for daily versioning
 - **Column Naming**: Prefix all columns with entity type - `user_*`, `repo_*` to avoid ambiguity in joins
 - **Custom Recommender Contract**: Extend `recommenders/Recommender.scala`, implement `recommendForUsers(userDF)` returning DataFrame with user/item/score columns
-- **Negative Sampling**: Use `NegativeBalancer` transformer for implicit feedback - generates random non-starred repos as negative examples (see `LogisticRegressionRanker.scala:256`)
+- **Negative Sampling**: Use `NegativeBalancer` transformer for implicit feedback - generates random non-starred repos as negative examples (see `LogisticRegressionRanker.scala:257`)
 
 ## Integration Points
 
