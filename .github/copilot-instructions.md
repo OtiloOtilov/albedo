@@ -41,7 +41,8 @@ This drives downstream Pipeline stages (StringIndexer, VectorAssembler, etc.)
 **Build JAR for Spark Jobs**:
 ```bash
 mvn clean package -DskipTests  # or make build_jar
-# Produces target/albedo-1.0.0-SNAPSHOT-uber.jar
+# Produces target/albedo-1.0.0-SNAPSHOT.jar
+# For uber jar with dependencies: mvn clean install -DskipTests
 ```
 
 **Local Development with Docker**:
@@ -66,11 +67,11 @@ make spark_start  # Standalone cluster on localhost:7077
 4. `make train_word2vec` → Word2VecCorpusBuilder → text embeddings
 5. `make train_lr` → LogisticRegressionRanker → final ranking model
 
-**Debugging Spark Jobs**: Set `RUN_WITH_INTELLIJ=true` env var to run locally with configurable memory. Check `LogisticRegressionRanker.scala:24-33` for IntelliJ-specific config block.
+**Debugging Spark Jobs**: Set `RUN_WITH_INTELLIJ=true` env var to run locally with configurable memory. Check `LogisticRegressionRanker.scala:24-34` for IntelliJ-specific config block.
 
 ## Project-Specific Conventions
 
-- **Spark Configuration**: All jobs read `spark.albedo.dataDir` and `spark.albedo.checkpointDir` from SparkConf (see `settings/package.scala`)
+- **Spark Configuration**: All jobs read `spark.albedo.dataDir` and `spark.albedo.checkpointDir` from SparkConf (see `src/main/scala/ws/vinta/albedo/settings/package.scala`)
 - **Date-Based Caching**: Parquet files include `${settings.today}` (yyyyMMdd format) in paths for daily versioning
 - **Column Naming**: Prefix all columns with entity type - `user_*`, `repo_*` to avoid ambiguity in joins
 - **Custom Recommender Contract**: Extend `recommenders/Recommender.scala`, implement `recommendForUsers(userDF)` returning DataFrame with user/item/score columns
